@@ -45,18 +45,18 @@ fun main() {
     val people = listOf(Person("Alice", 29), Person("Bob", 31), Person("Giseop", 24))
     findTheOldest(people)
     // Person(name=Bob, age=31)
-    
+
     println(people.maxByOrNull {it.age})
     // Person(name=Bob, age=31)
-    
+
     //자바였다면 people.stream().max(Comparator.comparingInt(Person::getAge)).orElseGet(null)
-    
+
     //정식 코드 식
     people.maxByOrNull({p:Person -> p.age})
 
     //실제 함수
-    public inline fun <T, R : Comparable<R>> Iterable<T>.maxByOrNull(selector: (T) -> R): T?{ 
-    //... 
+    public inline fun <T, R : Comparable<R>> Iterable<T>.maxByOrNull(selector: (T) -> R): T?{
+        //... 
     }
 }
 ```
@@ -72,14 +72,14 @@ fun main() {
     )
     println(names)
     // Alice Bob
-    
+
     //이걸 괄호 밖으로 전달
-     people.joinToStaring(" ") {p:Person -> p.name}
-    
+    people.joinToStaring(" ") {p:Person -> p.name}
+
     //파라미터 타입 제거되면
     people.maxByOrNull { p: Person -> p.age} //파라미터타입 명시
     people.maxByOrNull { p -> p.age} //파라미터 타입을 컴파일러가 추론... 대 추론...!!
-    
+
 }
 ```
 
@@ -87,7 +87,7 @@ fun main() {
 
 ```kotlin
 fun main() {
-    val sum = {x:Int, y:Int -> 
+    val sum = {x:Int, y:Int ->
         println("Computing the sum of $x and $y...")
         x + y
     }
@@ -99,8 +99,8 @@ fun main() {
 람다 안에서 바깥 함수의 로컬 변수 변경하기
 ```kotlin
 fun printProblemCounts(responses: Collection<String>) {
-    var clientErrors = 0 
-    var serverErrors = 0 
+    var clientErrors = 0
+    var serverErrors = 0
     responses.forEach {
         if (it.startsWith("4")) {
             clientErrors++
@@ -112,8 +112,8 @@ fun printProblemCounts(responses: Collection<String>) {
 }
 
 fun main() {
-    val responses = listOf("200 OK", "418 I'm a teapot", 
-                           "500 Interval Server Error")
+    val responses = listOf("200 OK", "418 I'm a teapot",
+        "500 Interval Server Error")
     printProblemCounts(responses)
     // 1 client erros, 1 server errors
 }
@@ -128,7 +128,7 @@ class Ref<T>(var value: T)
 
 fun main() {
     val counter = Ref(0)  //val 선언한 참조 클래스의 인스턴스에 var변수 변경
-    val inc = {counter.value++} 
+    val inc = {counter.value++}
 }
 
 fun main() {
@@ -141,7 +141,7 @@ fun main() {
 - ::
 - Person::age
 - ::Person -> Person 생성자 참조
-- ::sendEamil -> 람다 대신 멤버 참조 
+- ::sendEamil -> 람다 대신 멤버 참조
 - Person::isAdult -> 확장함수도 참조
 
 ### 5.1.6
